@@ -9,8 +9,13 @@ const Countries = ({countriesDataProps}) => {
     //lift up state -> 
     const [visitedCountries, setVisitedCountries] = useState([]);
 
-    const handleVisitedCountries = (countryNameAsparameter) =>{
-        console.log(`you have clicked ${countryNameAsparameter} country.`);
+    const handleVisitedCountries = (countryNameAsparameter) => {
+
+        console.log(`you have clicked ${countryNameAsparameter} country.`);//you have clicked 'name of the country u clicked'
+
+        setVisitedCountries([...visitedCountries,countryNameAsparameter]);//'visitedCountries' is an array that stores the name of the countries. every time u click a country's button, the name of the country gets stored in the 'vistedCountries' array as elements. and the state keeps a history of the elements and added and it keeps adding new elements as the button is clicked with the older elements. 
+        //at first the array is empty, as Jamaica's button is clicked it becomes [Jamaica] then when Comoros's  button is clicked it becomes [Jamaica, Comoros] and just like it keeps adding stuff.
+
     }
     //create the state in the parent Component(Countries.jsx). 
     //create the stateHandling function in the parent Component.
@@ -18,11 +23,17 @@ const Countries = ({countriesDataProps}) => {
     //deconstruct the props in the children (Country.jsx) component.
     //use that function in the children component's button to an event. if theres already an event in that button, you can use arrow function for wrapping everything together.  
 
-
     return (
 
         <div>
-            <h2>total countries : {countries.length}</h2>
+            <h2 className='text-4xl'>total countries : {countries.length}</h2>
+            <h2 className='text-3xl'>Visited countries : {visitedCountries.length}</h2>
+
+<ol>
+    {
+        visitedCountries.map((eachCountryName)=> <li>{eachCountryName}</li>)
+    }
+</ol>
             {/* {
                 countries.map(eachObj => <div>
                     <p>{eachObj.name.common}</p>
